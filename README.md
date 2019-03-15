@@ -50,9 +50,9 @@ Langkah pertama dalam menyelesaikan problem ini adalah dengan mengekstrak file c
 	- FILE
 	- struct stat <br/> <br/>
 - Approach : <br/> 
-Untuk menyelesaikan persoalan berikut, pertama-pertama harus dicari waktu sekarang (now) dan waktu file terakhir dibuka/diedit dengan lib `file.st_atime`. Setelah itu kita membandingkan perbedaan waktu sekarang dengan terakhir file dibuka menggunakan fungsi `difftime()`. Jika perbedaan waktu < 30 s maka akan membuat sebuah makan_sehat#.txt dengan # adalah increment nomor file.
-Umntuk membuat file sehat kita menggunakan `FILE` dengan penamaan increment. Kita menyediakan string makan_sehat ditambah # (increment nomor) dan ekstensi .txt
-Agar program berjalan tiap 5 detik artinya kita melakukan sleep(5); dalam program
+Untuk menyelesaikan persoalan berikut, pertama-pertama harus dicari waktu sekarang (now) dan waktu file terakhir dibuka/diedit dengan lib `time.h` yaitu `st_atime`. Setelah itu kita membandingkan perbedaan waktu sekarang dengan terakhir file dibuka menggunakan fungsi `difftime()`. Jika perbedaan waktu < 30 s maka akan membuat sebuah makan_sehat#.txt dengan # adalah increment nomor file.
+Untuk membuat file sehat kita menggunakan lib `FILE` dan menyediakan string 'makan_sehat' ditambah '#' (increment nomor) dan ekstensi '.txt'.
+Agar program berjalan tiap 5 detik artinya kita melakukan sleep(5); dalam program.
 
 ## 5
 - Problem : Membuat log tiap menit dari syslog (increment), dan membuat directory per 30 menit <br/>
