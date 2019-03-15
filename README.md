@@ -31,6 +31,29 @@ adalah www-data maka perlu dilakukannya pre-compute dengan cara `id -u www-data`
 sebelum file dapat dihapus perlu mengubah permission file tersebut menjadi mode `777`, dilakukan dengan menggunakan `chmod([directory], 777)`
 setelah mengganti permission, file dapat diremove menggunakan `remove([directory])`.
 
+## 3
+- Problem : Membuat daftar file berekstensi .txt dalam sebuah file zip <br/>
+- Tools :
+	- pipe()
+	- read([string],[target string],[size]);
+	- FILE
+	- dup2(fildes, fildes2);
+	- STDOUT_FILENO & STDIN_FILENO <br/> <br/>
+- Approach : <br/> 
+Langkah pertama dalam menyelesaikan problem ini adalah dengan mengekstrak file campur2.zip dengan `exec`. setelah file terekstrak kita melakukan exec `ls campur2` dengan menyimpan hasil output di suatu parameter `dup2(argv[#],STDOUT_FILENO);` fungsi dup2() sendiri adalah untuk menduplikasi open file descriptor. Selanjutnya mengambil hasil ls yang memiliki ekstensi .txt dengan exec `grep .txt`. Kita menggunakan `STDIN_FILENO` sebagai pengganti inputan. Setelah itu untuk mendapatkan hasil grep kita membaca paramater dengan read() dan menyimpanya pada sebuah string. Terakhir kita membuat file daftar.txt dan mengisinya dengan string yang telah kita siapkan menggunakan `FILE`.
+
+## 4
+- Problem : Membuat file makan_sehat#.txt ketika membuka file makanan_enak.txt saat range pengecekan waktu < 30 s <br/>
+- Tools :
+	- Daemon
+	- #include <time.h>
+	- FILE
+	- struct stat <br/> <br/>
+- Approach : <br/> 
+Untuk menyelesaikan persoalan berikut, pertama-pertama harus dicari waktu sekarang (now) dan waktu file terakhir dibuka/diedit dengan lib `file.st_atime`. Setelah itu kita membandingkan perbedaan waktu sekarang dengan terakhir file dibuka menggunakan fungsi `difftime()`. Jika perbedaan waktu < 30 s maka akan membuat sebuah makan_sehat#.txt dengan # adalah increment nomor file.
+Umntuk membuat file sehat kita menggunakan `FILE` dengan penamaan increment. Kita menyediakan string makan_sehat ditambah # (increment nomor) dan ekstensi .txt
+Agar program berjalan tiap 5 detik artinya kita melakukan sleep(5); dalam program
+
 ## 5
 - Problem : Membuat log tiap menit dari syslog (increment), dan membuat directory per 30 menit <br/>
 - Tools :
