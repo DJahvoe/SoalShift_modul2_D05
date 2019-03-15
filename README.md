@@ -1,14 +1,11 @@
 # SoalShift_modul2_D05
 
-## 1
-<br>
-Problem : Menambahkan _grey pada bagian belakang file ekstensi .png dipindahkan ke direktori /home/[user]/modul2/gambar
-<br>
+## 1 <br/>
+Problem : Menambahkan _grey pada bagian belakang file ekstensi .png dipindahkan ke direktori /home/[user]/modul2/gambar <br/>
 Tools :
 * Daemon
 * #include <dirent.h>
-* Fungsi rename()
-<br>
+* Fungsi rename() <br/>
 Approach :
 Untuk menyelesaikan persoalan berikut, digunakan `#include <dirent.h>` sebagai Directory Library yang berfungsi agar dapat
 membuka directory yang diinginkan dan melakukan trace pada tiap file yang ada di dalam directory tersebut, fungsi ini
