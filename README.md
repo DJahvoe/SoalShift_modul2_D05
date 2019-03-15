@@ -30,3 +30,20 @@ ekstraksi bertujuan untuk mendapatkan `owner_id` dan `group_id`, sedangkan untuk
 adalah www-data maka perlu dilakukannya pre-compute dengan cara `id -u www-data`, dengan ini akan didapatkan value 33. Setelah itu,
 sebelum file dapat dihapus perlu mengubah permission file tersebut menjadi mode `777`, dilakukan dengan menggunakan `chmod([directory], 777)`
 setelah mengganti permission, file dapat diremove menggunakan `remove([directory])`.
+
+## 5
+- Problem : Membuat log tiap menit dari syslog (increment), dan membuat directory per 30 menit <br/>
+- Tools :
+	- Daemon
+	- #include <time.h>
+	- mkdir([directory])
+	- FILE
+	- strftime([target_string], [size], [print], [parameter]) <br/> <br/>
+- Approach : <br/> 
+Untuk menyelesaikan persoalan berikut, pertama-pertama harus dicari waktu sekarang (now) dari fungsi `localtime(variable)`.
+Selanjutnya directory akan dibuat dengan `mkdir` sesuai string waktu yang didapatkan. Di dalam directory yang telah ada,
+dibuat file baru tiap menit dengan `sleep(60)` hingga counter mencapai 30, sehingga directory baru akan dibuat setelah 30 menit berikutnya.
+untuk mempermudah pembuatan nama file dan directory, dapat digunakan fungsi `strcat`, `strcpy`, dan `sprintf`. Setelah itu dibuka file dengan
+mode `read` untuk directory `/var/log/syslog` sebagai source, dan membuka file directory dengan nama `log#.log` (dengan # sebagai increment menit)
+dengan mode `write`, meng-copy seluruh isi file `var/log/syslog` ke file `log#.log` menggunakan `fgetc` untuk melakukan `read` pada source, dan `fputc` untuk
+`write` pada target.
